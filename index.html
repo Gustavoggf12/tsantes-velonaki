@@ -85,15 +85,33 @@ h3{font-size:20px;font-weight:700;margin-bottom:6px}
 .ph .alt{display:none;position:absolute;inset:0;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--dark);font-weight:700;font-size:14px;background:repeating-linear-gradient(45deg,var(--caramel),var(--caramel) 12px,var(--sand) 12px,var(--sand) 24px)}
 .ph.missing .alt{display:flex}
 
-/* vitrine */
-.gallery{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;max-width:900px;margin:0 auto}
-.gallery .ph{aspect-ratio:1/1;border-radius:18px;flex:0 0 calc(33.333% - 10px)}
-.gallery .ph.missing{display:none}
-@media(max-width:699px){
-  .gallery{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:4px 16px 10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .gallery::-webkit-scrollbar{display:none}
-  .gallery .ph{flex:0 0 82%;scroll-snap-align:center}
-}
+/* vitrine — carrossel */
+.carousel{position:relative;max-width:760px;margin:0 auto}
+.car-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;border-radius:22px;box-shadow:var(--shadow);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.car-track::-webkit-scrollbar{display:none}
+.car-track .ph{flex:0 0 100%;aspect-ratio:4/3;scroll-snap-align:start;border-radius:0}
+.car-track .ph.missing{display:none}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--white);color:var(--dark);font-size:20px;cursor:pointer;box-shadow:0 6px 18px rgba(42,26,18,.18);z-index:2;display:flex;align-items:center;justify-content:center}
+.car-btn.prev{left:-10px}.car-btn.next{right:-10px}
+@media(min-width:900px){.car-btn.prev{left:-58px}.car-btn.next{right:-58px}}
+.car-dots{display:flex;justify-content:center;gap:8px;margin-top:14px}
+.car-dots button{width:9px;height:9px;border-radius:50%;border:0;background:var(--caramel);cursor:pointer;padding:0}
+.car-dots button.on{background:var(--gold);transform:scale(1.25)}
+
+/* vídeo */
+.vwrap{border-radius:22px;overflow:hidden;box-shadow:var(--shadow-strong);background:#000;aspect-ratio:4/5;max-width:420px;margin:0 auto}
+.vwrap video{width:100%;height:100%;object-fit:cover;display:block}
+
+/* imagem do card de oferta */
+.plan-img{margin:-30px -26px 22px;border-radius:22px 22px 0 0;aspect-ratio:4/3}
+.plan.best .plan-img{margin-top:-32px}
+.plan-img.missing{display:none}
+
+/* foto de depoimento */
+.tphoto{aspect-ratio:4/5;border-radius:16px;margin-bottom:12px}
+.tphoto img{width:100%;height:100%;object-fit:cover}
+.tphoto.missing{display:none}
+.tphoto.is-avatar{aspect-ratio:auto;width:84px;height:84px;border-radius:50%;margin:0 auto -42px;position:relative;z-index:1;border:4px solid var(--white)}
 
 /* grid de cards */
 .grid{display:grid;gap:16px;grid-template-columns:1fr}
@@ -124,7 +142,7 @@ h3{font-size:20px;font-weight:700;margin-bottom:6px}
 @media(min-width:860px){.plans{grid-template-columns:1fr 1.15fr;align-items:center}}
 .plan{background:var(--white);border:1px solid var(--line);border-radius:24px;padding:30px 26px;box-shadow:var(--shadow);position:relative}
 .plan.best{border:2px solid var(--gold);box-shadow:var(--shadow-strong)}
-.plan .ribbon{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--dark-2);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;padding:7px 16px;border-radius:999px;white-space:nowrap}
+.plan .ribbon{position:absolute;z-index:3;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--dark-2);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;padding:7px 16px;border-radius:999px;white-space:nowrap}
 .plan h3{font-size:26px;text-align:center;margin-bottom:6px}
 .plan .desc{text-align:center;color:var(--muted);font-size:15px;margin-bottom:20px}
 .plan ul{list-style:none;display:grid;gap:9px;margin-bottom:22px}
@@ -149,7 +167,8 @@ h3{font-size:20px;font-weight:700;margin-bottom:6px}
 
 /* depoimentos */
 .tcard{color:var(--text);background:var(--white);border-radius:22px;padding:14px;box-shadow:var(--shadow);display:flex;flex-direction:column}
-.tcard .inner{background:var(--peach);border-radius:16px;padding:52px 22px 24px;text-align:center;position:relative;flex:1}
+.tcard .inner{background:var(--peach);border-radius:16px;padding:24px 22px;text-align:center;position:relative;flex:1}
+.tcard:has(.tphoto.is-avatar) .inner{padding-top:56px}
 .tcard .avatar{position:absolute;top:-36px;left:50%;transform:translateX(-50%);width:72px;height:72px;border-radius:50%;border:4px solid var(--white);background:var(--caramel);overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:900;font-size:24px;color:var(--dark)}
 .tcard .avatar img{width:100%;height:100%;object-fit:cover}
 .tcard .name{font-family:var(--serif);font-weight:900;font-size:19px}
@@ -158,7 +177,7 @@ h3{font-size:20px;font-weight:700;margin-bottom:6px}
 .tcard .verified{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;color:var(--green-dark);margin-bottom:12px}
 .tcard blockquote{font-style:italic;font-size:15px;line-height:1.6}
 .tcard blockquote strong{font-style:normal}
-.tcard{margin-top:40px}
+.tcard{margin-top:0}
 
 /* faq */
 .faq{max-width:780px;margin:0 auto;display:grid;gap:10px}
@@ -199,7 +218,7 @@ footer nav a{color:rgba(255,247,236,.8)}
     <h1>101 Σχέδια για Τσάντες με Βελονάκι σε PDF — διάλεξε το επόμενο μοντέλο σου και ξεκίνα αμέσως</h1>
     <p class="lead">Ανακάλυψε 101 διαφορετικά μοντέλα με φωτογραφίες, διαγράμματα, μέτρα, απαραίτητα υλικά και αναλυτικές οδηγίες — όλα στα ελληνικά και όλα σε ένα μέρος, για να μη χάνεις ώρες ψάχνοντας σχέδια ένα-ένα.</p>
 
-    <figure class="ph mock"><img src="images/mockup-principal-el.webp" alt="Ψηφιακή συλλογή με 101 σχέδια για τσάντες με βελονάκι" width="1254" height="940"><span class="alt">images/mockup-principal-el.webp — mockup principal (capa + celular + páginas)</span></figure>
+    <figure class="ph mock"><img src="images/hero-tsantes.webp" data-fallback="images/mockup-principal-el.webp" alt="Χειροποίητες τσάντες με βελονάκι" width="1254" height="940"><span class="alt">images/hero-tsantes.webp</span></figure>
 
     <p class="body">Από τη shopper μέχρι την τσάντα ώμου, από τα granny squares μέχρι την τσάντα-πουγκί: έχεις 101 μοντέλα στα χέρια σου κάθε φορά που θέλεις να ξεκινήσεις ένα νέο πλεκτό. Διάλεξε την τσάντα σου, άνοιξε το σχέδιο και πλέξε με τον δικό σου ρυθμό.</p>
 
@@ -231,13 +250,18 @@ footer nav a{color:rgba(255,247,236,.8)}
   <div class="wrap">
     <h2>Ποια τσάντα θέλεις να φτιάξεις ως επόμενο πλεκτό σου;</h2>
     <p class="sub">Shopper, τσάντες ώμου, hobo, granny squares, τσάντες από ράφια, μοντέλα μισοφέγγαρο, τσάντες-πουγκί και πολλές ακόμα ιδέες… αυτή είναι μόνο μια μικρή πρόγευση από τα 101 μοντέλα της συλλογής.</p>
-    <div class="gallery">
-      <figure class="ph"><img src="images/modelo-1.webp" alt="Τσάντα shopper από ράφια"><span class="alt">images/modelo-1.webp</span></figure>
-      <figure class="ph"><img src="images/modelo-2.webp" alt="Τσάντα ώμου granny square"><span class="alt">images/modelo-2.webp</span></figure>
-      <figure class="ph"><img src="images/modelo-3.webp" alt="Τσάντα-πουγκί"><span class="alt">images/modelo-3.webp</span></figure>
-      <figure class="ph"><img src="images/modelo-4.webp" alt="Τσάντα μισοφέγγαρο hobo"><span class="alt">images/modelo-4.webp</span></figure>
-      <figure class="ph"><img src="images/modelo-5.webp" alt="Δίχτυ-shopper με βελονάκι"><span class="alt">images/modelo-5.webp</span></figure>
-      <figure class="ph"><img src="images/modelo-6.webp" alt="Μικρή τσάντα clutch με αλυσίδα"><span class="alt">images/modelo-6.webp</span></figure>
+    <div class="carousel" id="vitrina">
+      <button class="car-btn prev" type="button" aria-label="Προηγούμενο">←</button>
+      <div class="car-track">
+        <figure class="ph"><img src="images/vitrina-1.webp" data-fallback="images/modelo-1.webp" alt="Τσάντα shopper από ράφια"><span class="alt">images/vitrina-1.webp</span></figure>
+        <figure class="ph"><img src="images/vitrina-2.webp" data-fallback="images/modelo-2.webp" alt="Τσάντα ώμου granny square"><span class="alt">images/vitrina-2.webp</span></figure>
+        <figure class="ph"><img src="images/vitrina-3.webp" data-fallback="images/modelo-3.webp" alt="Τσάντα-πουγκί"><span class="alt">images/vitrina-3.webp</span></figure>
+        <figure class="ph"><img src="images/vitrina-4.webp" data-fallback="images/modelo-4.webp" alt="Τσάντα μισοφέγγαρο"><span class="alt">images/vitrina-4.webp</span></figure>
+        <figure class="ph"><img src="images/vitrina-5.webp" data-fallback="images/modelo-5.webp" alt="Δίχτυ-shopper"><span class="alt">images/vitrina-5.webp</span></figure>
+        <figure class="ph"><img src="images/vitrina-6.webp" data-fallback="images/modelo-6.webp" alt="Μικρή τσάντα με αλυσίδα"><span class="alt">images/vitrina-6.webp</span></figure>
+      </div>
+      <button class="car-btn next" type="button" aria-label="Επόμενο">→</button>
+      <div class="car-dots"></div>
     </div>
     <div class="btn-wrap"><a class="btn" href="#paketa">Δες τα 101 μοντέλα</a></div>
   </div>
@@ -257,6 +281,16 @@ footer nav a{color:rgba(255,247,236,.8)}
       <div class="card"><div class="ico">📏</div><h3>Μέτρα</h3><p>Χρήσιμες ενδείξεις για να προετοιμάσεις σωστά το πλεκτό σου.</p></div>
       <div class="card"><div class="ico">🧵</div><h3>Απαραίτητα υλικά</h3><p>Νήματα, βελονάκια, χερούλια, λουριά, κουμπώματα και αξεσουάρ.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- VÍDEO (aparece só quando images/demo.mp4 existir) -->
+<section class="paper vid" id="video" hidden>
+  <div class="wrap narrow">
+    <span class="label">Δες το από μέσα</span>
+    <h2>Έτσι είναι ένα σχέδιο της συλλογής</h2>
+    <p class="sub">Από τη φωτογραφία και το διάγραμμα μέχρι το τελικό φινίρισμα — σε λίγα δευτερόλεπτα.</p>
+    <div class="vwrap"><video id="demo" src="images/demo.mp4" poster="images/demo-poster.webp" muted loop playsinline autoplay preload="metadata"></video></div>
   </div>
 </section>
 
@@ -350,6 +384,7 @@ footer nav a{color:rgba(255,247,236,.8)}
       <p class="arrow">⬇️ Το 95% προτιμά την παρακάτω επιλογή:</p>
       <div class="plan best">
         <span class="ribbon">Η πιο συμφέρουσα</span>
+        <figure class="ph plan-img"><img src="images/oferta-pliris.webp" data-fallback="images/mockup-principal-el.webp" alt="Πλήρες Πακέτο: 101 σχέδια + 3 δώρα"><span class="alt">images/oferta-pliris.webp</span></figure>
         <h3>Πλήρες Πακέτο</h3>
         <p class="desc">Όλη η συλλογή, τα 3 δώρα και μόνιμη πρόσβαση.</p>
         <ul>
@@ -392,20 +427,23 @@ footer nav a{color:rgba(255,247,236,.8)}
     <h2>Οι εμπειρίες τους με τη συλλογή</h2>
     <p class="sub">Δες τι λένε για τα μοντέλα, τα σχέδια και τις τσάντες που έφτιαξαν.</p>
     <div class="grid c3">
-      <div class="tcard"><div class="inner">
-        <div class="avatar"><img src="images/avatar-1.webp" alt="" onerror="this.remove()">Σ</div>
+      <div class="tcard">
+        <figure class="ph tphoto"><img src="images/testi-1.webp" data-fallback="images/avatar-1.webp" alt="Σοφία Μ."><span class="alt">images/testi-1.webp</span></figure>
+        <div class="inner">
         <div class="name">Σοφία Μ.</div><div class="city">Θεσσαλονίκη</div><div class="stars">★★★★★</div>
         <span class="verified">✔ Επαληθευμένη πελάτισσα</span>
         <blockquote>«Πάντα αγαπούσα το βελονάκι, αλλά δυσκολευόμουν να βρω <strong>σχέδια για τσάντες</strong> καλά εξηγημένα και με καθαρά διαγράμματα. Με τη Συλλογή 101 Σχέδια για Τσάντες με Βελονάκι σε PDF, όλα έγιναν πιο απλά. Σήμερα φτιάχνω shopper, δίχτυα και υπέροχα μοντέλα για μένα. Άρχισα κιόλας <strong>να τις πουλάω!</strong>»</blockquote>
       </div></div>
-      <div class="tcard"><div class="inner">
-        <div class="avatar"><img src="images/avatar-2.webp" alt="" onerror="this.remove()">Γ</div>
+      <div class="tcard">
+        <figure class="ph tphoto"><img src="images/testi-2.webp" data-fallback="images/avatar-2.webp" alt="Γεωργία Ρ."><span class="alt">images/testi-2.webp</span></figure>
+        <div class="inner">
         <div class="name">Γεωργία Ρ.</div><div class="city">Πάτρα</div><div class="stars">★★★★★</div>
         <span class="verified">✔ Επαληθευμένη πελάτισσα</span>
         <blockquote>«Λατρεύω την <strong>ποικιλία</strong>! Δεν περνάω πια ώρες ψάχνοντας στο ίντερνετ. Με αυτή τη συλλογή όλα είναι οργανωμένα και βρίσκω πάντα το μοντέλο που ταιριάζει στη διάθεσή μου. Έχω ήδη φτιάξει μια μικρή τσάντα για το κινητό και ξεκινάω μια μεγάλη πολύχρωμη shopper.»</blockquote>
       </div></div>
-      <div class="tcard"><div class="inner">
-        <div class="avatar"><img src="images/avatar-3.webp" alt="" onerror="this.remove()">Ε</div>
+      <div class="tcard">
+        <figure class="ph tphoto"><img src="images/testi-3.webp" data-fallback="images/avatar-3.webp" alt="Ελένη Β."><span class="alt">images/testi-3.webp</span></figure>
+        <div class="inner">
         <div class="name">Ελένη Β.</div><div class="city">Ηράκλειο</div><div class="stars">★★★★★</div>
         <span class="verified">✔ Επαληθευμένη πελάτισσα</span>
         <blockquote>«Πάντα ήθελα να φτιάξω πιο σύνθετες τσάντες, αλλά δεν έβρισκα καθαρά διαγράμματα. Με αυτή τη συλλογή έχω ήδη φτιάξει <strong>δύο σακίδια</strong> για τα ανίψια μου και <strong>μια τσάντα</strong> για μένα. Οι οδηγίες είναι ξεκάθαρες και το αποτέλεσμα πάντα πανέμορφο.»</blockquote>
@@ -481,12 +519,39 @@ document.querySelectorAll("[data-plan]").forEach(a => {
   a.addEventListener("click", () => { if (window.fbq) fbq("track", "InitiateCheckout", { content_name: a.dataset.plan }); });
 });
 
-/* placeholders: marca figuras cujas imagens ainda não existem */
+/* imagens: tenta data-fallback; se também falhar, marca a figura como missing */
 document.querySelectorAll(".ph img").forEach(img => {
-  const mark = () => img.closest(".ph").classList.add("missing");
-  img.addEventListener("error", mark);
-  if (img.complete && img.naturalWidth === 0) mark();
+  const fig = img.closest(".ph");
+  const fail = () => {
+    const fb = img.dataset.fallback;
+    if (fb && img.getAttribute("src") !== fb) { img.src = fb; if (fig.classList.contains("tphoto")) fig.classList.add("is-avatar"); return; }
+    fig.classList.add("missing"); fig.dispatchEvent(new Event("missing", { bubbles: true }));
+  };
+  img.addEventListener("error", fail);
+  if (img.complete && img.naturalWidth === 0) fail();
 });
+
+/* carrossel */
+(function(){
+  const c = document.getElementById("vitrina"); if (!c) return;
+  const track = c.querySelector(".car-track"), dots = c.querySelector(".car-dots");
+  const slides = () => [...track.querySelectorAll(".ph:not(.missing)")];
+  let i = 0;
+  function render(){ dots.innerHTML = ""; slides().forEach((_, k) => { const b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "Εικόνα " + (k+1)); b.classList.toggle("on", k === i); b.onclick = () => go(k); dots.appendChild(b); }); }
+  function go(k){ const s = slides(); if (!s.length) return; i = (k + s.length) % s.length; track.scrollTo({ left: s[i].offsetLeft, behavior: "smooth" }); render(); }
+  c.querySelector(".prev").onclick = () => go(i - 1);
+  c.querySelector(".next").onclick = () => go(i + 1);
+  track.addEventListener("scroll", () => { const s = slides(); const k = s.findIndex(el => Math.abs(el.offsetLeft - track.scrollLeft) < el.offsetWidth / 2); if (k >= 0 && k !== i) { i = k; render(); } }, { passive: true });
+  c.addEventListener("missing", render);
+  render();
+})();
+
+/* vídeo: mostra a seção só se o arquivo existir */
+(function(){
+  const sec = document.getElementById("video"), v = document.getElementById("demo"); if (!v) return;
+  v.addEventListener("loadedmetadata", () => { sec.hidden = false; });
+  v.addEventListener("error", () => { sec.hidden = true; });
+})();
 
 /* CTA fixo: aparece depois do hero, some sobre os pacotes */
 const sticky = document.getElementById("sticky"), hero = document.querySelector(".hero"), plans = document.getElementById("paketa");
