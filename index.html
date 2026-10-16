@@ -15,7 +15,7 @@
 <!-- META PIXEL: cole o snippet aqui -->
 <style>
 :root{
-  --cream:#fff7ec;--paper:#f8f1e8;--sand:#efd9c1;--caramel:#e8c7a2;--peach:#f9d9c8;
+  --gold-light:#e9c27a;--cream:#fff7ec;--paper:#f8f1e8;--sand:#efd9c1;--caramel:#e8c7a2;--peach:#f9d9c8;
   --dark:#3a2418;--dark-2:#25140d;--text:#2a1a12;--muted:rgba(42,26,18,.74);
   --gold:#d6a354;--terracotta:#b66a4b;--green:#18c74a;--green-dark:#0fa83a;--white:#fff;
   --line:rgba(58,36,24,.14);--shadow:0 18px 44px rgba(42,26,18,.13);--shadow-strong:0 24px 62px rgba(42,26,18,.22);
@@ -56,8 +56,21 @@ h3{font-size:20px;font-weight:700;margin-bottom:6px}
 .trust svg{width:18px;height:18px;flex:none}
 @media(min-width:700px){.trust{display:flex;flex-wrap:wrap;gap:12px 28px}}
 
-/* topbar */
-.topbar{background:var(--terracotta);color:#fff;text-align:center;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:9px 16px}
+/* topbar — marquee */
+.topbar{background:linear-gradient(90deg,#1f110a,#3a2418 50%,#1f110a);color:var(--cream);font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:9px 0;border-bottom:1px solid rgba(214,163,84,.35);overflow:hidden;position:relative}
+.topbar::before,.topbar::after{content:"";position:absolute;top:0;bottom:0;width:60px;z-index:1;pointer-events:none}
+.topbar::before{left:0;background:linear-gradient(90deg,#1f110a,transparent)}
+.topbar::after{right:0;background:linear-gradient(270deg,#1f110a,transparent)}
+.marquee{overflow:hidden;white-space:nowrap}
+.marquee-track{display:inline-flex;animation:mq 28s linear infinite;will-change:transform}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.mq{display:inline-flex;align-items:center;gap:10px;padding:0 36px}
+.mq i{font-style:normal;color:var(--gold)}
+.mq b{color:var(--gold);font-weight:400}
+.mq .timer{font-style:normal;font-variant-numeric:tabular-nums;background:rgba(255,255,255,.1);border:1px solid rgba(214,163,84,.5);color:#fff;padding:2px 9px;border-radius:999px;margin-left:4px;letter-spacing:.06em}
+.mq .timer::before{content:"⏱ ";}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.marquee-track{animation:none}}
 
 /* hero */
 .hero{padding:48px 0 64px;background:linear-gradient(180deg,var(--dark-2),var(--dark))}
@@ -65,7 +78,20 @@ h3{font-size:20px;font-weight:700;margin-bottom:6px}
 .badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:20px}
 .pill{display:inline-block;font-size:11.5px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.1);color:var(--gold);border:1px solid rgba(214,163,84,.4)}
 .pill.strong{background:var(--gold);color:var(--dark-2);border-color:var(--gold)}
-.hero h1{color:var(--cream);max-width:860px;margin:0 auto 18px}
+.hero h1{color:var(--cream);max-width:900px;margin:0 auto 18px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero .lead strong{color:var(--gold-light,#e9c27a);font-weight:700}
+.hero-review{max-width:640px;margin:-10px auto 22px;background:var(--white);color:var(--text);border-radius:16px;border-left:5px solid var(--gold);padding:20px 22px;text-align:left;box-shadow:var(--shadow-strong)}
+.hero-review .stars{color:var(--gold);letter-spacing:2px;font-size:14px;margin-bottom:8px}
+.hero-review blockquote{font-style:italic;font-size:16px;line-height:1.55;margin-bottom:14px}
+.hero-review blockquote strong{font-style:normal;color:var(--terracotta)}
+.hero-review .who{display:flex;align-items:center;gap:12px;font-size:14px;line-height:1.3}
+.hero-review .who b{color:var(--terracotta)}
+.hero-review .who small{color:var(--muted);font-size:12px}
+.hero-review .avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;flex:none;background:var(--caramel)}
+.hero-review .avatar img{width:100%;height:100%;object-fit:cover}
+.pills{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:26px}
+.pills span{display:inline-flex;align-items:center;gap:6px;background:rgba(255,247,236,.08);border:1px solid rgba(214,163,84,.45);color:var(--cream);font-size:13px;font-weight:700;padding:9px 16px;border-radius:999px}
 .hero .lead{max-width:720px;margin:0 auto 32px;font-size:18px;color:rgba(255,247,236,.85)}
 .hero .mock{max-width:640px;margin:0 auto 32px;border-radius:var(--radius);box-shadow:var(--shadow-strong);overflow:hidden}
 .mock.missing{aspect-ratio:4/3}
@@ -209,29 +235,35 @@ footer nav a{color:rgba(255,247,236,.8)}
 </head>
 <body>
 
-<div class="topbar">Προσφορά λανσαρίσματος · Τιμή λανσαρίσματος για τη Συλλογή 2026</div>
+<div class="topbar" id="topbar">
+  <div class="marquee">
+    <div class="marquee-track" id="marquee">
+      <span class="mq"><i>✦</i> ΜΟΝΟ ΣΗΜΕΡΑ <b>·</b> ΤΙΜΗ ΛΑΝΣΑΡΙΣΜΑΤΟΣ <b>·</b> 3 ΔΩΡΑ ΣΤΟ ΠΛΗΡΕΣ ΠΑΚΕΤΟ <b>·</b> Η ΠΡΟΣΦΟΡΑ ΛΗΓΕΙ ΣΕ <em class="timer">15:00</em></span>
+    </div>
+  </div>
+</div>
 
 <!-- HERO -->
 <header class="hero" id="top">
   <div class="wrap">
     <div class="badges"><span class="pill">Συλλογή 2026</span><span class="pill strong">Όλα στα ελληνικά</span></div>
-    <h1>101 Σχέδια για Τσάντες με Βελονάκι σε PDF — διάλεξε το επόμενο μοντέλο σου και ξεκίνα αμέσως</h1>
-    <p class="lead">Ανακάλυψε 101 διαφορετικά μοντέλα με φωτογραφίες, διαγράμματα, μέτρα, απαραίτητα υλικά και αναλυτικές οδηγίες — όλα στα ελληνικά και όλα σε ένα μέρος, για να μη χάνεις ώρες ψάχνοντας σχέδια ένα-ένα.</p>
+    <h1>Φτιάξε πολυτελείς τσάντες με βελονάκι ακολουθώντας τα <em>101 Έτοιμα Σχέδια</em> — και πούλησέ τες από 65 ευρώ και πάνω, από το σπίτι σου</h1>
+    <p class="lead">Χωρίς ψάξιμο. Χωρίς μισές οδηγίες. Χωρίς αγγλικά. <strong>Υλικά από 10 έως 32 ευρώ που γίνονται τσάντα που πουλιέται 65 ευρώ και πάνω</strong> — 101 μοντέλα με φωτογραφίες, διαγράμματα και μέτρα, όλα στα ελληνικά, όλα σε ένα μέρος.</p>
 
     <figure class="ph mock"><img src="images/hero-tsantes.webp" data-fallback="images/mockup-principal-el.webp" alt="Χειροποίητες τσάντες με βελονάκι" width="1254" height="940"><span class="alt">images/hero-tsantes.webp</span></figure>
 
-    <p class="body">Από τη shopper μέχρι την τσάντα ώμου, από τα granny squares μέχρι την τσάντα-πουγκί: έχεις 101 μοντέλα στα χέρια σου κάθε φορά που θέλεις να ξεκινήσεις ένα νέο πλεκτό. Διάλεξε την τσάντα σου, άνοιξε το σχέδιο και πλέξε με τον δικό σου ρυθμό.</p>
+    <div class="hero-review">
+      <div class="stars">★★★★★</div>
+      <blockquote>«Έφτιαξα την πρώτη μου τσάντα ένα Σαββατοκύριακο, χωρίς να ψάξω τίποτα. Την επόμενη εβδομάδα <strong>πούλησα τις δύο πρώτες</strong>.»</blockquote>
+      <div class="who">
+        <span class="avatar"><img src="images/avatar-1.webp" alt="Σοφία Μ."></span>
+        <span><b>Σοφία Μ.</b><br><small>Θεσσαλονίκη · Επαληθευμένη πελάτισσα</small></span>
+      </div>
+    </div>
 
-    <ul class="checks">
-      <li>101 σχέδια για τσάντες με βελονάκι σε PDF</li>
-      <li>Φωτογραφίες &amp; διαγράμματα βελονακιού</li>
-      <li>Μέτρα &amp; απαραίτητα υλικά</li>
-      <li>Μοντέλα για κάθε επίπεδο δυσκολίας</li>
-      <li>Όλα στα ελληνικά, βήμα προς βήμα</li>
-      <li>Άμεση ψηφιακή πρόσβαση μετά την επιβεβαίωση της πληρωμής</li>
-      <li>Για κινητό, tablet ή υπολογιστή</li>
-      <li>Για σένα, για δώρα ή για να πουλάς τις τσάντες που φτιάχνεις</li>
-    </ul>
+    <div class="pills">
+      <span>✨ Άμεση πρόσβαση</span><span>∞ Πρόσβαση για πάντα</span><span>🔒 Δικό σου για πάντα</span>
+    </div>
 
     <a class="btn" href="#paketa">Θέλω τα 101 σχέδια</a>
     <p class="micro">Ο σύνδεσμος πρόσβασης αποστέλλεται με e-mail μετά την επιβεβαίωση της πληρωμής.</p>
@@ -551,6 +583,19 @@ document.querySelectorAll(".ph img").forEach(img => {
   const sec = document.getElementById("video"), v = document.getElementById("demo"); if (!v) return;
   v.addEventListener("loadedmetadata", () => { sec.hidden = false; });
   v.addEventListener("error", () => { sec.hidden = true; });
+})();
+
+/* topbar: duplica o conteúdo para o loop ser contínuo + cronômetro evergreen (15 min por sessão) */
+(function(){
+  const t = document.getElementById("marquee"); if (!t) return;
+  const html = t.innerHTML; t.innerHTML = html + html + html + html;
+  const TIMER_MINUTES = 15;                      // 0 = sem cronômetro
+  const els = t.querySelectorAll(".timer");
+  if (!TIMER_MINUTES) { els.forEach(e => e.remove()); return; }
+  let end; try { end = +sessionStorage.getItem("tv_end"); } catch(e){}
+  if (!end || end < Date.now()) { end = Date.now() + TIMER_MINUTES*60*1000; try { sessionStorage.setItem("tv_end", end); } catch(e){} }
+  function tick(){ const r = Math.max(0, end - Date.now()); const m = String(Math.floor(r/60000)).padStart(2,"0"), sec = String(Math.floor(r%60000/1000)).padStart(2,"0"); els.forEach(e => e.textContent = m+":"+sec); if (r > 0) setTimeout(tick, 1000); }
+  tick();
 })();
 
 /* CTA fixo: aparece depois do hero, some sobre os pacotes */
