@@ -86,13 +86,13 @@ h3{font-size:20px;font-weight:700;margin-bottom:6px}
 .ph.missing .alt{display:flex}
 
 /* vitrine */
-.mosaic{max-width:640px;margin:0 auto}
-.mosaic .ph{aspect-ratio:4/3}
-.carousel{display:none}
+.gallery{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;max-width:900px;margin:0 auto}
+.gallery .ph{aspect-ratio:1/1;border-radius:18px;flex:0 0 calc(33.333% - 10px)}
+.gallery .ph.missing{display:none}
 @media(max-width:699px){
-  .mosaic{display:none}
-  .carousel{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 0 10px;margin:0 -16px;padding-left:16px;padding-right:16px;-webkit-overflow-scrolling:touch}
-  .carousel .ph{flex:0 0 82%;aspect-ratio:1/1;scroll-snap-align:center}
+  .gallery{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:4px 16px 10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .gallery::-webkit-scrollbar{display:none}
+  .gallery .ph{flex:0 0 82%;scroll-snap-align:center}
 }
 
 /* grid de cards */
@@ -231,14 +231,13 @@ footer nav a{color:rgba(255,247,236,.8)}
   <div class="wrap">
     <h2>Ποια τσάντα θέλεις να φτιάξεις ως επόμενο πλεκτό σου;</h2>
     <p class="sub">Shopper, τσάντες ώμου, hobo, granny squares, τσάντες από ράφια, μοντέλα μισοφέγγαρο, τσάντες-πουγκί και πολλές ακόμα ιδέες… αυτή είναι μόνο μια μικρή πρόγευση από τα 101 μοντέλα της συλλογής.</p>
-    <div class="mosaic"><figure class="ph"><img src="images/mosaico-modelos.webp" alt="Επιλογή από τσάντες με βελονάκι" width="1115" height="836"><span class="alt">images/mosaico-modelos.webp — mosaico 4×3 (pode reaproveitar o italiano)</span></figure></div>
-    <div class="carousel">
-      <figure class="ph"><img src="images/modelo-1.webp" alt="Μοντέλο 1"><span class="alt">images/modelo-1.webp</span></figure>
-      <figure class="ph"><img src="images/modelo-2.webp" alt="Μοντέλο 2"><span class="alt">images/modelo-2.webp</span></figure>
-      <figure class="ph"><img src="images/modelo-3.webp" alt="Μοντέλο 3"><span class="alt">images/modelo-3.webp</span></figure>
-      <figure class="ph"><img src="images/modelo-4.webp" alt="Μοντέλο 4"><span class="alt">images/modelo-4.webp</span></figure>
-      <figure class="ph"><img src="images/modelo-5.webp" alt="Μοντέλο 5"><span class="alt">images/modelo-5.webp</span></figure>
-      <figure class="ph"><img src="images/modelo-6.webp" alt="Μοντέλο 6"><span class="alt">images/modelo-6.webp</span></figure>
+    <div class="gallery">
+      <figure class="ph"><img src="images/modelo-1.webp" alt="Τσάντα shopper από ράφια"><span class="alt">images/modelo-1.webp</span></figure>
+      <figure class="ph"><img src="images/modelo-2.webp" alt="Τσάντα ώμου granny square"><span class="alt">images/modelo-2.webp</span></figure>
+      <figure class="ph"><img src="images/modelo-3.webp" alt="Τσάντα-πουγκί"><span class="alt">images/modelo-3.webp</span></figure>
+      <figure class="ph"><img src="images/modelo-4.webp" alt="Τσάντα μισοφέγγαρο hobo"><span class="alt">images/modelo-4.webp</span></figure>
+      <figure class="ph"><img src="images/modelo-5.webp" alt="Δίχτυ-shopper με βελονάκι"><span class="alt">images/modelo-5.webp</span></figure>
+      <figure class="ph"><img src="images/modelo-6.webp" alt="Μικρή τσάντα clutch με αλυσίδα"><span class="alt">images/modelo-6.webp</span></figure>
     </div>
     <div class="btn-wrap"><a class="btn" href="#paketa">Δες τα 101 μοντέλα</a></div>
   </div>
